@@ -1,8 +1,7 @@
 import React from 'react';
-import { useMutation } from '@apollo/client';
+import RecipeInput from './recipeInput';
 
 const AddRecipe = () => {
-  const addRecipe = useMutation(addRecipe);
 
   return (
     <div>

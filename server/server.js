@@ -2,13 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { ApolloServer, graphiqlExpress, graphqlExpress } = require('apollo-server-express');
+const { ApolloServer, gql } = require('apollo-server-express');
 const { makeExecutableSchema } = require ('graphql-tools');
 const http = require('http');
-// require('dotenv').config({ path: 'variables.env' });
+const fs = require('fs');
+require('dotenv').config({ path: 'variables.env' });
 
-const { typeDefs } = require('./schema');
+const Recipe = require('./models/Recipe');
+
+// const { typeDefs } = require('./schema');
 const { resolvers } = require('./resolvers');
+const typeDefs = gql(fs.readFileSync('./schema.graphql', { encoding: 'utf-8'}));
 
 // スキーマを作成
 const schema = makeExecutableSchema({
@@ -17,22 +21,22 @@ const schema = makeExecutableSchema({
 });
 
 // DB接続
-// mongoose.connect(process.env.MONGO_URI, { autoIndex: false })
-// .then(() => console.log('DB connected'))
-// .catch(err => console.log(err));
+mongoose.connect(process.env.MONGO_URI, { autoIndex: false })
+.then(() => console.log('DB connected'))
+.catch(err => console.log(err));
 
 // 初期化
 const app = express();
 
 // オリジン間リソース共有の設定
 const corsOptions = {
-  origin: true,
+  origin: 'http://localhost:3000',
   credentials: true
 };
 app.use(cors(corsOptions));
 
 // ApolloServerのインスタンスを作成
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
+const apolloServer = new ApolloServer({ schema, context: { Recipe } });
 apolloServer.applyMiddleware({ app, path: '/graphql' });
 
 const port = 9000;

@@ -8,7 +8,7 @@ exports.typeDefs = `
     addRecipe (
       name: String!
       description: String!
-      ingredients: String!
+      ingredients: String
     ): Recipe
   }
 
@@ -16,7 +16,7 @@ exports.typeDefs = `
     _id: ID
     name: String!
     description: String!
-    ingredients: [Ingredient]
+    ingredients: String
   }
 
   type Ingredient {

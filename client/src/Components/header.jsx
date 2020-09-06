@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
-const Header = () => {
+const Header = props => {
   const [login, setLogin] = useState(true);
-  const [index, setIndex] = useState(0);
+  const index = props.index;
   
   const UnAuth = () => (
     <>
@@ -53,7 +53,7 @@ const Header = () => {
   );
 
   const handleChange = (e, index) => {
-    setIndex(index);
+    props.setIndex(index);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from './Components/header';
@@ -13,10 +13,12 @@ import Profile from './Components/profile';
 import './App.css';
 
 const App = () => {
+  const [index, setIndex] = useState(0);
+
   return (
     <Router>
       <React.Fragment>
-        <Header />
+        <Header setIndex={setIndex} index={index}/>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/signin" component={Signin} />
