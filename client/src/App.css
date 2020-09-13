@@ -40,3 +40,8 @@ ul {
 .headerItem:visited {
   border-bottom: orange 2px solid;
 }
+
+.signoutButton,
+.signoutButton:focus {
+  background-color: transparent;
+}

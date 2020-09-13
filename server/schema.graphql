@@ -1,13 +1,28 @@
+scalar Array
+
 type Query {
     getAllRecipes: [Recipe]
     getRecipe(_id: ID): Recipe
+    searchRecipe(searchTerm: String): [Recipe]
+
+    getCurrentUser: User
   }
 
 type Mutation {
   addRecipe (
     detail: DetailInput
-    ingredient: [IngredientInput]
   ): Recipe
+
+  signupUser(
+    username: String!,
+    email: String!,
+    password: String!,
+  ): Token
+
+  signinUser(
+    username: String!,
+    password: String!
+  ): Token
 }
 
 type Recipe {
@@ -21,6 +36,7 @@ type Recipe {
 input DetailInput {
   name: String
   description: String
+  ingredient: Array
 }
 
 type Detail {
@@ -28,14 +44,20 @@ type Detail {
   description: String
 }
 
-input IngredientInput {
-  _id: ID
-  name: String!
-  count: String!
-}
-
 type Ingredient {
-  _id: ID
   name: String
   count: String
+}
+
+type User {
+  _id: ID
+  username: String!
+  password: String!
+  email: String!
+  registeredDate: String
+  toBuy: [Ingredient]
+}
+
+type Token {
+  token: String!
 }

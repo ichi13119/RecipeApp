@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { getAllRecipes } from '../graphql/queries';
 
 const Home = () => {
   const { loading, error 
     , data } = useQuery(getAllRecipes);
-    console.log(data);
 
   const Recipe = recipe => {
     return (
       <div key={recipe._id}>
+        <Link to={`/recipe/${recipe._id}`}>
         {recipe.name}
         {recipe.description}
         {recipe.ingredients.map((ingredient, i) => {
@@ -20,6 +21,7 @@ const Home = () => {
             </div>
           )
         })}
+        </Link>
       </div>
     )
   };

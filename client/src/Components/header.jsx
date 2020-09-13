@@ -4,7 +4,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 const Header = props => {
-  const [login, setLogin] = useState(true);
   const index = props.index;
   
   const UnAuth = () => (
@@ -38,16 +37,16 @@ const Header = props => {
       <ListItem
         button
         selected={index === 4}
-        onClick={e => handleChange(e, 3)}
+        onClick={e => handleChange(e, 4)}
       >
         <Link className="headerItem" to="profile">Profile</Link>
       </ListItem>
       <ListItem
         button
         selected={index === 5}
-        onClick={e => handleChange(e, 4)}
+        onClick={e => handleChange(e, 5)}
       >
-        <Link className="headerItem" to="/">Signout</Link>
+        <button className="headerItem signoutButton" to="/">Signout</button>
       </ListItem>
     </>
   );
@@ -84,7 +83,7 @@ const Header = props => {
         >
           <Link className="headerItem" to="/tobuy">ToBuy</Link>
         </ListItem>
-          {login ?
+          {props.session.getCurrentUser ?
             <Auth />
             :
             <UnAuth />

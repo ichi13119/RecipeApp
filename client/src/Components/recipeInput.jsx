@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { addRecipeMutation } from '../graphql/queries';
 
@@ -9,7 +9,8 @@ const RecipeInput = () => {
 
   const [details, setDetails] = useState({
     name: '',
-    description: ''
+    description: '',
+    ingredient: []
   });
 
   const [ingredient, setIngredient] = useState({
@@ -23,7 +24,7 @@ const RecipeInput = () => {
     const key = e.target.name;
     const value = e.target.value;
     details[key] = value;
-    let detailsData = Object.assign({}, details);
+    let detailsData = Object.assign({...details}, details);
     setDetails(detailsData);
   };
 
@@ -44,9 +45,13 @@ const RecipeInput = () => {
     let ingredientInput = [...ingredients, ingredient];
     setIngredients(ingredientInput
       );
-    setIngredient({ name: '', count: '' });
-    resetIng();
-  };
+      setIngredient({ name: '', count: '' });
+      resetIng();
+    };
+    
+    useEffect(() => {
+      setDetails({ ...details, ingredient: ingredients})
+  }, [ingredients]);
   
   const allDelete = () => {
     const confirmDelete = window.confirm(
@@ -72,7 +77,7 @@ const RecipeInput = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addRecipe({ variables: { detail: details, ingredients } });
+    addRecipe({ variables: { detail: details } });
   }
 
   return (
