@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/ichi13119/RecipeApp/issues"
   },
-  "homepage": "https://github.com/ichi13119/RecipeApp#readme"
+  "homepage": "https://github.com/ichi13119/RecipeApp#readme",
+  "dependencies": {
+    "client": "file:client",
+    "server": "file:server"
+  }
 }
