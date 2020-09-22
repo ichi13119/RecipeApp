@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import { Button } from '@material-ui/core';
+
 import { SIGNIN_USER } from '../graphql/queries';
 
 const Signin = ({ history, refetch }) => {
@@ -44,16 +46,44 @@ const Signin = ({ history, refetch }) => {
       claerInput();
       history.push('/');
     })
-  }
+  };
+
+  const varidateForm = () => {
+    const { username, password } = user;
+    const isValid = !username || !password;
+    return isValid;
+  };
 
   return (
     <div>
-      <div>Signin</div>
+      <h2 className="pageTitle">Signin</h2>
       <div>
-        <form id="userForm" onSubmit={e => handleSubmit(e)}>
-          <input type="text" name="username" placeholder="名前" onChange={handleChange} />
-          <input type="text" name="password" placeholder="パスワード" onChange={handleChange} />
-          <button type="submit">サインイン</button>
+        <form
+          id="userForm"
+          className="form"
+          onSubmit={e => handleSubmit(e)}
+        >
+          <input
+            className="formInput"
+            type="text"
+            name="username"
+            placeholder="名前"
+            onChange={handleChange}
+            />
+          <input
+            className="formInput"
+            type="password"
+            name="password"
+            placeholder="パスワード"
+            onChange={handleChange}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={varidateForm()}
+          >
+            サインイン
+          </Button>
         </form>
       </div>
     </div>

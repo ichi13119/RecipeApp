@@ -95,3 +95,15 @@ export const SIGNIN_USER = gql`
     }
   }
 `;
+
+export const ADD_TOBUY = gql`
+  mutation($username: String!, $ingredient: [IngredientInput]) {
+    addToBuy(
+      username: $username,
+      ingredient: $ingredient
+    ) {
+      _id
+      username      
+    }
+  }
+`;

@@ -22,8 +22,7 @@ const UserSchema = new Schema({
     default: Date.now
   },
   toBuy: {
-    type: [Schema.Types.ObjectId],
-    ref: 'Recipe'
+    type: Array
   },
 });
 

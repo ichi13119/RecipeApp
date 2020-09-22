@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { SIGNUP_USER } from '../graphql/queries'; 
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { Button } from "@material-ui/core";
+
+import { SIGNUP_USER } from "../graphql/queries";
 
 const Signup = ({ history, refetch }) => {
   const initialState = {
-    username: '',
-    email: '',
-    password: '',
-    passwordConfirm: ''
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
   };
   const [signupUser] = useMutation(SIGNUP_USER);
 
@@ -22,7 +24,7 @@ const Signup = ({ history, refetch }) => {
     document.getElementById("userForm").reset();
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
     user[key] = value;
@@ -32,30 +34,76 @@ const Signup = ({ history, refetch }) => {
 
   const handleSubmit = (e, refetch) => {
     e.preventDefault();
-    signupUser({ variables: {
-      username: user.username,
-      email: user.email,
-      password: user.password
-    } }).then(async ({data}) => {
+    signupUser({
+      variables: {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+      },
+    }).then(async ({ data }) => {
       console.log(data);
-      localStorage.setItem('token', data.signupUser.token);
+      localStorage.setItem("token", data.signupUser.token);
       await refetch();
       clearState();
       claerInput();
-      history.push('/');
+      history.push("/");
     });
+  };
+
+  const varidateForm = () => {
+    const {
+      username,
+      email,
+      password,
+      passwordConfirm
+    } = user;
+    const isValid = !username || !email || !password || password !== passwordConfirm;
+    return isValid;
   };
 
   return (
     <div>
-      <div>Signup</div>
+      <h2 className="pageTitle">Signup</h2>
       <div>
-        <form id="userForm" onSubmit={e => handleSubmit(e, refetch)}>
-          <input type="text" name="username" placeholder="名前" onChange={handleChange}/>
-          <input type="text" name="email" placeholder="メールアドレス" onChange={handleChange}/>
-          <input type="password" name="password" placeholder="パスワード" onChange={handleChange}/>
-          <input type="password" name="passwordConfirm" placeholder="パスワード再入力" onChange={handleChange}/>
-          <button type="submit">登録</button>
+        <form
+          id="userForm"
+          className="form"
+          onSubmit={(e) => handleSubmit(e, refetch)}
+        >
+          <input
+            className="formInput"
+            type="text"
+            name="username"
+            placeholder="名前"
+            onChange={handleChange}
+            />
+          <input
+            className="formInput"
+            type="text"
+            name="email"
+            placeholder="メールアドレス"
+            onChange={handleChange}
+            />
+          <input
+            className="formInput"
+            type="password"
+            name="password"
+            placeholder="パスワード"
+            onChange={handleChange}
+            />
+          <input
+            className="formInput"
+            type="password"
+            name="passwordConfirm"
+            placeholder="パスワード再入力"
+            onChange={handleChange}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={varidateForm()}>
+            登録
+          </Button>
         </form>
       </div>
     </div>

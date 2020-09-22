@@ -8,12 +8,11 @@ import Signup from './Components/signup';
 import AddRecipe from './Components/addRecipe';
 import RecipeDetail from './Components/recipeDetail';
 import Search from './Components/search';
-import ToBuy from './Components/toBuy';
 import Profile from './Components/profile';
 
 import withSession from './Components/withSesssion';
 
-import './App.css';
+import './App.scss';
 
 const App = ({ refetch, session }) => {
   const [index, setIndex] = useState(0);
@@ -26,11 +25,11 @@ const App = ({ refetch, session }) => {
           <Route exact path="/" component={Home} />
           <Route path="/signin" render={() => <Signin refetch={refetch} />} />
           <Route path="/signup" render={() => <Signup refetch={refetch} />} />
-          <Route path="/tobuy" component={ToBuy} />
-          <Route path="/recipe/:_id" component={RecipeDetail} />
+          {/* <Route path="/tobuy" component={ToBuy} /> */}
+          <Route path="/recipe/:_id" render={routeProps => <RecipeDetail {...routeProps} session={session} />} />
           <Route path="/addrecipe" component={AddRecipe} />
           <Route path="/search" component={Search} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/profile" render={() => <Profile session={session}/>} />
           <Redirect to="/" />
         </Switch>
       </React.Fragment>

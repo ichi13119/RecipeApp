@@ -9,7 +9,7 @@ type Query {
   }
 
 type Mutation {
-  addRecipe (
+  addRecipe(
     detail: DetailInput
   ): Recipe
 
@@ -23,6 +23,11 @@ type Mutation {
     username: String!,
     password: String!
   ): Token
+
+  addToBuy(
+    username: String!,
+    ingredient: [IngredientInput]
+  ): User
 }
 
 type Recipe {
@@ -42,6 +47,11 @@ input DetailInput {
 type Detail {
   name: String
   description: String
+}
+
+input IngredientInput {
+  name: String!
+  count: String!
 }
 
 type Ingredient {

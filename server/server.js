@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const decode = require('jwt-decode');
 const expressJwt = require('express-jwt');
 const { ApolloServer, gql } = require('apollo-server-express');
 const { makeExecutableSchema } = require ('graphql-tools');
@@ -28,7 +29,11 @@ const schema = makeExecutableSchema({
 mongoose.set('useCreateIndex', true);
 
 // DB接続
-mongoose.connect(process.env.MONGO_URI, { autoIndex: false })
+mongoose.connect(process.env.MONGO_URI, {
+  autoIndex: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 .then(() => console.log('DB connected'))
 .catch(err => console.log(err));
 
@@ -65,14 +70,15 @@ app.use(async (req, res, next) => {
   if (bearToken) {
     const bearer = bearToken.split(' ');
     const token = bearer[1];
-    // console.log(token);
-    if (token !== "null") {
-      try {
-        const currentUser = await jwt.verify(token, process.env.SECRET);
-        req.currentUser = currentUser;
-      } catch (err) {
-        console.log(err);
-      }
+    // const { exp } = decode(token);
+      // if (token !== "null" && Date.now() >= exp * 1000) {
+      if (token !== "null") {
+        try {
+          const currentUser = await jwt.verify(token, process.env.SECRET);
+          req.currentUser = currentUser;
+        } catch (err) {
+          console.log(err);
+        }
     }
   }
   next();

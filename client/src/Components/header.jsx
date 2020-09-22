@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import SignOut from './signOut';
 
 const Header = props => {
   const index = props.index;
@@ -46,7 +47,7 @@ const Header = props => {
         selected={index === 5}
         onClick={e => handleChange(e, 5)}
       >
-        <button className="headerItem signoutButton" to="/">Signout</button>
+      <SignOut />
       </ListItem>
     </>
   );
@@ -76,14 +77,14 @@ const Header = props => {
         >
           <Link className="headerItem" to="/search">Search</Link>
         </ListItem>
-        <ListItem
+        {/* <ListItem
           button
           selected={index === 2}
           onClick={e => handleChange(e, 2)}
         >
           <Link className="headerItem" to="/tobuy">ToBuy</Link>
-        </ListItem>
-          {props.session.getCurrentUser ?
+        </ListItem> */}
+          {props.session && props.session.getCurrentUser ?
             <Auth />
             :
             <UnAuth />

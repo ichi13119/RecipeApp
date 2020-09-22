@@ -36,22 +36,17 @@ exports.resolvers = {
       }
     },
     getCurrentUser: async (root, args, { currentUser, User }) => {
-      // console.log('currentUser', currentUser);
       if (!currentUser) {
         return null;
       }
-      const user = await User.findOne({ username: currentUser.username })
-      .populate({
-        path: 'toBuy',
-        model: 'Recipe'
-      });
-      console.log(user);
+      const user = await User.findOne({ username: currentUser.username });
+      // console.log(user);
       return user;
     },
   },
   Mutation: {
     addRecipe: async (_root, { detail }, { Recipe }) => {
-      console.log(detail);
+      // console.log(detail);
       const newRecipe = await new Recipe({
         name: detail.name,
         description: detail.description,
@@ -82,6 +77,15 @@ exports.resolvers = {
         throw new Error('パスワードが間違っています');
       }
       return { token: createToken(user, process.env.SECRET, '1hr') };
+    },
+    addToBuy: async (root, { username, ingredient }, { User }) => {
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $push: { toBuy: ingredient }},
+        { useFindAndModify: false }
+      );
+      console.log(user);
+      return user;
     }
   }
 };
