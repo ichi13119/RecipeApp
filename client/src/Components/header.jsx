@@ -14,14 +14,14 @@ const Header = props => {
         selected={index === 3}
         onClick={e => handleChange(e, 3)}
       >
-        <Link className="headerItem" to="signin">Singin</Link>
+        <Link className="headerItem" to="/signin">Singin</Link>
       </ListItem>
       <ListItem
         button
         selected={index === 4}
         onClick={e => handleChange(e, 4)}
       >
-        <Link className="headerItem" to="signup">Singup</Link>
+        <Link className="headerItem" to="/signup">Singup</Link>
       </ListItem>
     </>
   );
@@ -33,14 +33,14 @@ const Header = props => {
         selected={index === 3}
         onClick={e => handleChange(e, 3)}
       >
-        <Link className="headerItem" to="addrecipe">Add Recipe</Link>
+        <Link className="headerItem" to="/addrecipe">Add Recipe</Link>
       </ListItem>
       <ListItem
         button
         selected={index === 4}
         onClick={e => handleChange(e, 4)}
       >
-        <Link className="headerItem" to="profile">Profile</Link>
+        <Link className="headerItem" to="/profile">Profile</Link>
       </ListItem>
       <ListItem
         button

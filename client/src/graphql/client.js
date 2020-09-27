@@ -1,8 +1,8 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client/core';
 import decode from 'jwt-decode';
 
-// const httpUrl = 'http://localhost:9000/graphql';
-const httpUrl = 'https://recipe-app-for-mern.herokuapp.com/graphql';
+const httpUrl = 'http://localhost:9000/graphql';
+// const httpUrl = 'https://recipe-app-for-mern.herokuapp.com/graphql';
 
 const httpLink = ApolloLink.from([
   new ApolloLink((operation, forward) => {
