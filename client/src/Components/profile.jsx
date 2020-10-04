@@ -37,8 +37,8 @@ const Profile = ({ session }) => {
       <h2 className="pageTitle">Profile</h2>
         <div>
         
-        <h3>ユーザー名：{session.getCurrentUser.username}</h3>
-        <h3>買い物リスト</h3>
+        <h3 className="contentTitle">ユーザー名：{session.getCurrentUser.username}</h3>
+        <h3 className="contentTitle">買い物リスト</h3>
         {/* {!edit ?
           <button
           onClick={() => handleEdit()}

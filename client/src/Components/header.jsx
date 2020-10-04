@@ -45,7 +45,7 @@ const Header = props => {
       <ListItem
         button
         selected={index === 5}
-        onClick={e => handleChange(e, 5)}
+        onClick={e => handleChange(e, 0)}
       >
       <SignOut />
       </ListItem>

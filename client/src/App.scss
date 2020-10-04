@@ -1,3 +1,8 @@
+$pc: 1200px;
+$pro: 1024px;
+$tab: 960px;
+$sp: 480px;
+
 .App {
   margin: 0 5%;
 }
@@ -19,6 +24,10 @@ a {
   color: rgb(255, 167, 67);
   font-weight: bold;
   padding: 0;
+
+  @media (max-width: ($tab)) {
+    border-bottom: 2px solid rgb(255, 167, 67);
+  }
 }
 
 ul {
@@ -34,9 +43,13 @@ ul {
 .headerList {
   display: flex;
   justify-content: space-around;
-
+  
   &.MuiList-padding {
     padding-top: 12px;
+    
+    @media (max-width: ($sp)) {
+      padding-top: 4px;
+    }
   }
 }
 
@@ -51,11 +64,20 @@ ul {
   cursor: pointer;
   padding:12px 0;
   font-size: 20px;
+  
+  @media (max-width: ($tab)) {
+    font-size: 16px;
+  }
+
+  @media (max-width: ($sp)) {
+    padding: 8px 0;
+    font-size: 12px;
+  }
 }
 
-.headerItem:visited {
-  border-bottom: orange 2px solid;
-}
+// .headerItem:visited {
+  // border-bottom: orange 2px solid;
+// }
 
 .signoutButton,
 .signoutButton:focus {
@@ -66,6 +88,10 @@ ul {
   display: inline-block;
   border-bottom: 1px solid black;
   padding-bottom: 4px;
+
+  @media (max-width: ($tab)) {
+    font-size: 16px;
+  }
 }
 
 .subTitle {
@@ -74,12 +100,27 @@ ul {
   padding-bottom: 4px;
 }
 
+.searchContainer {
+  @media (max-width: ($sp)) {
+    text-align: center;
+  }
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   // justify-content: space-around;
   align-content: flex-start;
   padding: 0 28px;
+  
+  @media (max-width: ($pro)) {
+    padding: 0 20px;
+    justify-content: space-around;
+  }
+
+  @media (max-width: ($sp)) {
+    padding: 0;
+  }
 }
 
 .card {
@@ -107,6 +148,16 @@ ul {
     left: 15px;
     font-size: 12px;
   }
+
+  @media (max-width: ($tab)) {
+    width: 250px;
+    height: 240px;
+    margin: 18px 36px;
+  }
+
+  @media (max-width: ($sp)) {
+    width: 90%;
+  }
 }
 
 input { 
@@ -115,6 +166,7 @@ input {
 
 .searchInput {
   margin-right: 20px;
+  margin-bottom: 40px;
 }
 
 .MuiButton-contained.MuiButton-root { 
@@ -146,12 +198,35 @@ input {
     letter-spacing: 1px;
     margin-bottom: 40px;
 
+    &.name {
+      padding-bottom: 10px;
+    }
     
     &:focus {
       outline: none;
     }
-  }
+    
+    @media (max-width: ($tab)) {
+      width: 90%;
+    }
 
+    @media (max-width: ($sp)) {
+      width: 100%;
+      font-size: 12px;
+    }
+  }
+  
+  &.sign {
+    @media (max-width: ($sp)) {
+      padding: 0;
+      
+      .formInput {
+        font-size: 14px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  
   &.recipe {
     padding: 40px 15%;
     
@@ -179,7 +254,42 @@ input {
       .MuiButton-contained.MuiButton-root {
         height: 44px;
       }
+
+      @media (max-width: ($tab)) {
+        width: 95%;
+
+        .ingredientName {
+          width: 40%;
+        }
+        
+        .ingredientCount {
+          width: 20%;
+        }
+        
+        .MuiButton-contained.MuiButton-root {
+          height: 44px;
+        }
+      }
       
+      @media (max-width: ($sp)) {
+        width: 100%;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+
+        .ingredientName {
+          width: 60%;
+          margin-bottom: 30px;
+        }
+        
+        .ingredientCount {
+          width: 30%;
+          margin-bottom: 30px;
+        }
+
+        .MuiButton-contained.MuiButton-root {
+          height: 36px;
+        }
+      }
     }
     
     .ingredients {
@@ -190,6 +300,7 @@ input {
       margin-bottom: 30px;
       
       .ingredient {
+        
         &.name {
           width: 50%;
         }
@@ -197,20 +308,65 @@ input {
         &.count {
           width: 20%;
         }
-      }
+        
+        @media (max-width: ($tab)) {
+          padding-top: 6px;
+        }
 
+        @media (max-width: ($sp)) {
+          width: 100%;
+        }
+      }
+      
       .deleteButton {
         background-color: red;
         color: #fff;
         font-weight: bold;
       }
+      
+      @media (max-width: ($tab)) {
+        font-size: 18px;
+        
+        .deleteButton {
+          font-size: 14px;
+        }
+      }
+      
+      @media (max-width: ($sp)) {
+        font-size: 14px;
+        width: 100%;
+
+        .deleteButton {
+          height: 30px;
+        }
+      }
+    }
+
+    @media (max-width: ($sp)) {
+      padding: 30px;
     }
   }
 
   .buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
     button {
-      margin: 0 30px;
-      font-size: 18px;
+      // margin: 0 30px;
+      font-size: 20px;
+
+      @media (max-width: ($tab)) {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: ($sp)) {
+
+      button{
+        font-size: 12px;
+        // margin: 0 24px;
+      }
     }
   }
 }
@@ -254,5 +410,11 @@ input {
       display: inline-block;
       margin-right: 20px;
     }
+  }
+}
+
+.contentTitle {
+  @media (max-width: ($sp)) {
+    font-size: 14px;
   }
 }

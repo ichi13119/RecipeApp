@@ -23,8 +23,8 @@ const App = ({ refetch, session }) => {
         <Header setIndex={setIndex} index={index} session={session}/>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/signin" render={() => <Signin refetch={refetch} />} />
-          <Route path="/signup" render={() => <Signup refetch={refetch} />} />
+          <Route path="/signin" render={() => <Signin refetch={refetch} setIndex={setIndex} />} />
+          <Route path="/signup" render={() => <Signup refetch={refetch} setIndex={setIndex} />} />
           {/* <Route path="/tobuy" component={ToBuy} /> */}
           <Route path="/recipe/:_id" render={routeProps => <RecipeDetail {...routeProps} session={session} />} />
           <Route path="/addrecipe" component={AddRecipe} />

@@ -99,7 +99,7 @@ const RecipeInput = () => {
           onSubmit={(e) => handleSubmit(e)}
         >
           <input
-            className="formInput"
+            className="formInput name"
             type="text"
             name="name"
             placeholder="レシピ名"

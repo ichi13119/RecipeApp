@@ -37,25 +37,27 @@ const Search = () => {
       <div>
         <h2 className="pageTitle">Search</h2>
       </div>
-      <input
-        className="searchInput"
-        type="search"
-        defaultValue={searchTerm}
-        onChange={(e) => handleChange(e)}
-      />
-      <Button
-        className="button"
-        variant="contained"
-        type="button"
-        disabled={!searchTerm}
-        onClick={() => search()}
-      >
-        検索
-      </Button>
+      <div className="searchContainer">
+        <input
+          className="searchInput"
+          type="search"
+          defaultValue={searchTerm}
+          onChange={(e) => handleChange(e)}
+          />
+        <Button
+          className="button"
+          variant="contained"
+          type="button"
+          disabled={!searchTerm}
+          onClick={() => search()}
+          >
+          検索
+        </Button>
+      </div>
+      <div className="container">
       {data ? (
         data.searchRecipe.map((recipe) => {
           return (
-            <div className="container">
               <Card className="card" variant="outlined" key={recipe._id}>
                 <Link to={`/recipe/${recipe._id}`}>
                   <div className="recipeName">{recipe.name}</div>
@@ -65,12 +67,13 @@ const Search = () => {
                   {formatDate(recipe.createDate)}
                 </div>
               </Card>
-            </div>
-          );
-        })
-      ) : (
-        <div></div>
-      )}
+            );
+          })
+        ) : (
+          <div></div>
+          )
+      }
+      </div>
     </div>
   );
 };

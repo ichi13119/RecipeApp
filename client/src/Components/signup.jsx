@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 
 import { SIGNUP_USER } from "../graphql/queries";
 
-const Signup = ({ history, refetch }) => {
+const Signup = ({ history, refetch, setIndex }) => {
   const initialState = {
     username: "",
     email: "",
@@ -47,6 +47,7 @@ const Signup = ({ history, refetch }) => {
       clearState();
       claerInput();
       history.push("/");
+      setIndex(0);
     });
   };
 
@@ -67,7 +68,7 @@ const Signup = ({ history, refetch }) => {
       <div>
         <form
           id="userForm"
-          className="form"
+          className="form sign"
           onSubmit={(e) => handleSubmit(e, refetch)}
         >
           <input
